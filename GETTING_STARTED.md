@@ -20,7 +20,7 @@ and docking station status information.
 
 ### Obtain an individual BikePoint  
 
-Information upon an individual BikePoint can be obtained using the location 
+Information upon an individual BikePoint can be obtained using the `location` 
 method, whilst also passing the ID of the BikePoint.
 
 ```ruby
@@ -158,4 +158,74 @@ client.bike_point.search("St. James's")
       // Additional Locations
       ...
     ]
+```
+
+
+## Cycle Superhighway
+
+The cycle superhighway interface interacts with the /CycleSuperhighway 
+end point upon the TFL API. This end point will return information 
+regarding the [Cycle Superhighways][cycle_superhighways] locations, 
+including coordinates of the route.
+
+[cycle_superhighways]: https://tfl.gov.uk/modes/cycling/routes-and-maps/cycle-superhighways
+
+### Obtain all Cycle Superhighways routes
+
+In order to obtain all Cycle Superhighway routes and their details the 
+`superhighways` method can be used.
+
+```ruby
+client = TflApi::Client.new(app_id: YOUR_TFL_APP_ID, app_key: YOUR_TFL_APP_KEY)
+client.cycle.superhighways
+
+=>  [
+      {
+        'id': 'CS-1',
+        'label': 'CS Route 1',
+        'labelShort': 'CS-1',
+        'segmented': true,
+        'geography': {
+          'type': 'LineString',
+          'coordinates': [],
+          'crs': {
+            'type': 'name',
+            'properties': {
+              'name': 'ABC:1234'
+            }
+          }
+        }
+      }
+      ...
+      // Additional Cycle Superhighways
+      ...
+    ]
+```
+
+### Obtain an individual Cycle Superhighway routes
+
+Information upon an individual Cycle Superhighway can be obtained using
+the `superhighway` method, whilst passing the ID of the Cycle 
+Superhighway route.
+
+```ruby
+client = TflApi::Client.new(app_id: YOUR_TFL_APP_ID, app_key: YOUR_TFL_APP_KEY)
+client.cycle.superhighway('CS-1')
+
+=>  {
+      'id': 'CS-1',
+      'label': 'CS Route 1',
+      'labelShort': 'CS-1',
+      'segmented': true,
+      'geography': {
+        'type': 'LineString',
+        'coordinates': [],
+        'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'ABC:1234'
+          }
+        }
+      }
+    }
 ```

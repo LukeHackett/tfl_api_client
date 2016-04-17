@@ -104,6 +104,14 @@ module TflApi
       TflApi::Client::BikePoint.new(self)
     end
 
+    # Creates an instance to the Cycle class by passing a reference to self
+    #
+    # @return [TflApi::Client::Cycle] An object to Cycle subclass
+    #
+    def cycle
+      TflApi::Client::Cycle.new(self)
+    end
+
     # Performs a HTTP GET request to the api, based upon the given URI resource
     # and any additional HTTP query parameters. This method will automatically
     # inject the mandatory application id and application key HTTP query
